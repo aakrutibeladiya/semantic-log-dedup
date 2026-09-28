@@ -1,0 +1,63 @@
+# ~20 queries with expected dependency flags, used to evaluate query_analysis.py's own
+# accuracy (README D8, §9.1 "Analyzer accuracy"). expected_flags is a subset of
+# [identity, network, paths, numbers]; empty means the query is safe to dedupe fully.
+- id: A1
+  query: authentication failures or break-in attempts
+  expected_flags: []
+- id: A2
+  query: a session being opened or closed normally
+  expected_flags: []
+- id: A3
+  query: reverse DNS or hostname mismatch warnings
+  expected_flags: []
+- id: A4
+  query: errors about missing files or misconfiguration
+  expected_flags: []
+- id: A5
+  query: successful password authentications
+  expected_flags: []
+- id: A6
+  query: login attempts using default or service account names such as admin, oracle, test, postgres
+  expected_flags: [identity]
+- id: A7
+  query: attempts to log in as root
+  expected_flags: [identity]
+- id: A8
+  query: failed logins for the username jsmith
+  expected_flags: [identity]
+- id: A9
+  query: user accounts with root privileges attempting sudo
+  expected_flags: [identity]
+- id: A10
+  query: errors mentioning a specific hostname like db01.internal
+  expected_flags: [identity]
+- id: A11
+  query: logins from the IP address 192.168.1.1
+  expected_flags: [network]
+- id: A12
+  query: connections originating from outside the local network
+  expected_flags: [network]
+- id: A13
+  query: connection attempts from IP addresses in the 10.0.0.0/8 range
+  expected_flags: [network]
+- id: A14
+  query: access to files under the app configuration directory
+  expected_flags: [paths]
+- id: A15
+  query: configuration files being read from /var/log
+  expected_flags: [paths]
+- id: A16
+  query: operations on files inside /home directories
+  expected_flags: [paths]
+- id: A17
+  query: connections on ports above 50000
+  expected_flags: [numbers]
+- id: A18
+  query: requests with a response time over 500 milliseconds
+  expected_flags: [numbers]
+- id: A19
+  query: file sizes larger than 10 MB
+  expected_flags: [numbers]
+- id: A20
+  query: root logins originating from a specific external IP address
+  expected_flags: [identity, network]

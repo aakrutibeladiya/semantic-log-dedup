@@ -1,0 +1,33 @@
+[project]
+name = "sift"
+version = "0.1.0"
+description = "Query-aware deduplication for semantic log search"
+requires-python = ">=3.11"
+dependencies = [
+    "typesafe-sdk>=0.7.1",
+    "drain3>=0.9.11",
+    "pandas>=2.0",
+    "matplotlib>=3.8",
+    "pyyaml>=6.0",
+    "python-dotenv>=1.0",
+]
+
+[project.scripts]
+sift = "sift.cli:main"
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0", "ruff>=0.6"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/sift"]
+
+[tool.ruff]
+line-length = 120
+src = ["src", "tests"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

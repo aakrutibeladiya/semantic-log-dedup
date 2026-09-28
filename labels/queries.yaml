@@ -1,0 +1,39 @@
+# Query set for evaluation (README §8.2). label_method: "template" -> per-EventId hand
+# labels in labels/openssh_template_labels.csv; "code:<fn>" -> eval/ground_truth.py
+# extracts a parameter from the line directly and checks it (D11's catch: template
+# labels only work when the query doesn't depend on template parameters).
+- id: Q1
+  dataset: OpenSSH
+  query: authentication failures or break-in attempts
+  label_method: template
+  expected_flags: []
+- id: Q2
+  dataset: OpenSSH
+  query: a session being opened or closed normally
+  label_method: template
+  expected_flags: []
+- id: Q3
+  dataset: OpenSSH
+  query: reverse DNS or hostname mismatch warnings
+  label_method: template
+  expected_flags: []
+- id: Q4
+  dataset: OpenSSH
+  query: login attempts using default or service account names such as admin, oracle, test, postgres
+  label_method: code:default_accounts
+  expected_flags: [identity]
+- id: Q5
+  dataset: OpenSSH
+  query: attempts to log in as root
+  label_method: code:root_login
+  expected_flags: [identity]
+- id: Q6
+  dataset: OpenSSH
+  query: connections on ports above 50000
+  label_method: refused
+  expected_flags: [numbers]
+- id: Q7
+  dataset: Apache
+  query: errors about missing files or misconfiguration
+  label_method: template
+  expected_flags: []

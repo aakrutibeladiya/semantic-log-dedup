@@ -1,0 +1,19 @@
+dataset,query_id,query,strategy,refused,precision,recall,f1,agreement_with_baseline,label_impure_groups,lines_total,lines_judged,reduction_ratio,input_tokens,output_tokens,resolved_model,model_requested,chunk_size,threshold
+OpenSSH,Q1,authentication failures or break-in attempts,none,False,0.7917109458023379,0.9669046073977936,0.8705813613789074,1.0,0,2000,2000,1.0,212596,40268,jev-1.13.0,jev-1.13.0,30,0.5
+OpenSSH,Q1,authentication failures or break-in attempts,drain,False,0.9986953685583823,0.9935107073329007,0.9960962914769032,0.7825,2,2000,131,0.0655,11846,2640,jev-1.13.0,jev-1.13.0,30,0.5
+OpenSSH,Q1,authentication failures or break-in attempts,query-aware,False,0.9986953685583823,0.9935107073329007,0.9960962914769032,0.7825,2,2000,131,0.0655,11846,2640,jev-1.13.0,jev-1.13.0,30,0.5
+OpenSSH,Q2,a session being opened or closed normally,none,False,0.05,0.6666666666666666,0.09302325581395349,1.0,0,2000,2000,1.0,214596,40268,jev-1.13.0,jev-1.13.0,30,0.5
+OpenSSH,Q2,a session being opened or closed normally,drain,False,0.047619047619047616,0.6666666666666666,0.08888888888888889,0.982,1,2000,131,0.0655,11977,2640,jev-1.13.0,jev-1.13.0,30,0.5
+OpenSSH,Q2,a session being opened or closed normally,query-aware,False,0.047619047619047616,0.6666666666666666,0.08888888888888889,0.982,1,2000,131,0.0655,11977,2640,jev-1.13.0,jev-1.13.0,30,0.5
+OpenSSH,Q3,reverse DNS or hostname mismatch warnings,none,False,1.0,1.0,1.0,1.0,0,2000,2000,1.0,212596,40268,jev-1.13.0,jev-1.13.0,30,0.5
+OpenSSH,Q3,reverse DNS or hostname mismatch warnings,drain,False,1.0,1.0,1.0,1.0,0,2000,131,0.0655,11846,2640,jev-1.13.0,jev-1.13.0,30,0.5
+OpenSSH,Q3,reverse DNS or hostname mismatch warnings,query-aware,False,1.0,1.0,1.0,1.0,0,2000,131,0.0655,11846,2640,jev-1.13.0,jev-1.13.0,30,0.5
+OpenSSH,Q4,"login attempts using default or service account names such as admin, oracle, test, postgres",none,False,0.2973621103117506,1.0,0.4584103512014787,1.0,0,2000,2000,1.0,234596,40268,jev-1.13.0,jev-1.13.0,30,0.5
+OpenSSH,Q4,"login attempts using default or service account names such as admin, oracle, test, postgres",drain,False,0.1548223350253807,0.9838709677419355,0.2675438596491228,0.7005,34,2000,131,0.0655,13287,2640,jev-1.13.0,jev-1.13.0,30,0.5
+OpenSSH,Q4,"login attempts using default or service account names such as admin, oracle, test, postgres",query-aware,False,0.2973621103117506,1.0,0.4584103512014787,1.0,0,2000,2000,1.0,234596,40268,jev-1.13.0,jev-1.13.0,30,0.5
+OpenSSH,Q5,attempts to log in as root,none,False,0.6898792943361188,1.0,0.8164835164835165,1.0,0,2000,2000,1.0,212596,40268,jev-1.13.0,jev-1.13.0,30,0.5
+OpenSSH,Q5,attempts to log in as root,drain,False,0.9443037974683545,0.5020188425302826,0.6555360281195078,0.639,3,2000,131,0.0655,11846,2640,jev-1.13.0,jev-1.13.0,30,0.5
+OpenSSH,Q5,attempts to log in as root,query-aware,False,0.6898792943361188,1.0,0.8164835164835165,1.0,0,2000,2000,1.0,212596,40268,jev-1.13.0,jev-1.13.0,30,0.5
+OpenSSH,Q6,connections on ports above 50000,none,False,,,,1.0,,2000,2000,1.0,220596,40268,jev-1.13.0,jev-1.13.0,30,0.5
+OpenSSH,Q6,connections on ports above 50000,drain,False,,,,0.674,,2000,131,0.0655,12370,2640,jev-1.13.0,jev-1.13.0,30,0.5
+OpenSSH,Q6,connections on ports above 50000,query-aware,True,,,,,,,,,,,,jev-1.13.0,30,0.5

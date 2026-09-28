@@ -1,0 +1,28 @@
+EventId,EventTemplate,Q1,Q2,Q3
+E1,"Accepted password for <*> from <*> port <*> ssh2",0,0,0
+E2,"Connection closed by <*> [preauth]",0,0,0
+E3,"Did not receive identification string from <*>",1,0,0
+E4,"Disconnecting: Too many authentication failures for admin [preauth]",1,0,0
+E5,"Disconnecting: Too many authentication failures for root [preauth]",1,0,0
+E6,"error: Received disconnect from <*>: <*>: com.jcraft.jsch.JSchException: Auth fail [preauth]",1,0,0
+E7,"error: Received disconnect from <*>: <*>: No more user authentication methods available. [preauth]",1,0,0
+E8,"Failed none for invalid user <*> from <*> port <*> ssh2",1,0,0
+E9,"Failed password for <*> from <*> port <*> ssh2",1,0,0
+E10,"Failed password for invalid user <*> from <*> port <*> ssh2",1,0,0
+E11,"fatal: Write failed: Connection reset by peer [preauth]",0,0,0
+E12,"input_userauth_request: invalid user <*> [preauth]",1,0,0
+E13,"Invalid user <*> from <*>",1,0,0
+E14,"message repeated <*> times: [ Failed password for root from <*> port <*>]",1,0,0
+E15,"PAM <*> more authentication failure; logname= uid=<*> euid=<*> tty=ssh ruser= rhost=<*>",1,0,0
+E16,"PAM <*> more authentication failures; logname= uid=<*> euid=<*> tty=ssh ruser= rhost=<*>",1,0,0
+E17,"PAM <*> more authentication failures; logname= uid=<*> euid=<*> tty=ssh ruser= rhost=<*>  user=root",1,0,0
+E18,"PAM service(sshd) ignoring max retries; <*> > <*>",1,0,0
+E19,"pam_unix(sshd:auth): authentication failure; logname= uid=<*> euid=<*> tty=ssh ruser= rhost=<*>",1,0,0
+E20,"pam_unix(sshd:auth): authentication failure; logname= uid=<*> euid=<*> tty=ssh ruser= rhost=<*> user=<*>",1,0,0
+E21,"pam_unix(sshd:auth): check pass; user unknown",1,0,0
+E22,"pam_unix(sshd:session): session closed for user <*>",0,1,0
+E23,"pam_unix(sshd:session): session opened for user <*> by (uid=<*>)",0,1,0
+E24,"Received disconnect from <*>: <*>: Bye Bye [preauth]",0,0,0
+E25,"Received disconnect from <*>: <*>: Closed due to user request. [preauth]",0,0,0
+E26,"Received disconnect from <*>: <*>: disconnected by user",0,1,0
+E27,"reverse mapping checking getaddrinfo for <*> [<*>] failed - POSSIBLE BREAK-IN ATTEMPT!",1,0,1
