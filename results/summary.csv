@@ -17,3 +17,9 @@ OpenSSH,Q5,attempts to log in as root,query-aware,False,0.6898792943361188,1.0,0
 OpenSSH,Q6,connections on ports above 50000,none,False,,,,1.0,,2000,2000,1.0,220596,40268,jev-1.13.0,jev-1.13.0,30,0.5
 OpenSSH,Q6,connections on ports above 50000,drain,False,,,,0.674,,2000,131,0.0655,12370,2640,jev-1.13.0,jev-1.13.0,30,0.5
 OpenSSH,Q6,connections on ports above 50000,query-aware,True,,,,,,,,,,,,jev-1.13.0,30,0.5
+Apache,Q7,errors about missing files or misconfiguration,none,False,0.9387755102040817,0.2367066895368782,0.37808219178082186,1.0,0,2000,2000,1.0,188229,40268,jev-1.13.0,jev-1.13.0,30,0.5
+Apache,Q7,errors about missing files or misconfiguration,drain,False,1.0,0.4974271012006861,0.6643757159221076,0.8815,0,2000,12,0.006,1300,244,jev-1.13.0,jev-1.13.0,30,0.5
+Apache,Q7,errors about missing files or misconfiguration,query-aware,False,1.0,0.4974271012006861,0.6643757159221076,0.8815,0,2000,12,0.006,1300,244,jev-1.13.0,jev-1.13.0,30,0.5
+Linux,Q8,authentication failures or break-in attempts,none,False,0.9921011058451816,0.9587786259541985,0.9751552795031055,1.0,0,2000,2000,1.0,214636,40268,jev-1.13.0,jev-1.13.0,30,0.5
+Linux,Q8,authentication failures or break-in attempts,drain,False,1.0,0.8198473282442749,0.901006711409396,0.952,0,2000,61,0.0305,5712,1232,jev-1.13.0,jev-1.13.0,30,0.5
+Linux,Q8,authentication failures or break-in attempts,query-aware,False,1.0,0.8198473282442749,0.901006711409396,0.952,0,2000,61,0.0305,5712,1232,jev-1.13.0,jev-1.13.0,30,0.5

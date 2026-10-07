@@ -30,7 +30,11 @@ from sift.query_analysis import analyze_query
 
 ROOT = Path(__file__).parent.parent
 QUERIES_PATH = ROOT / "labels" / "queries.yaml"
-TEMPLATE_LABELS_PATH = ROOT / "labels" / "openssh_template_labels.csv"  # E1 is OpenSSH-only
+TEMPLATE_LABELS_BY_DATASET = {
+    "OpenSSH": ROOT / "labels" / "openssh_template_labels.csv",
+    "Apache": ROOT / "labels" / "apache_template_labels.csv",
+    "Linux": ROOT / "labels" / "linux_template_labels.csv",
+}
 SUMMARY_PATH = ROOT / "results" / "summary.csv"
 
 STRATEGY_NAMES = ["none", "drain", "query-aware"]
@@ -65,7 +69,7 @@ def _ground_truth_for(query: dict, structured) -> dict[int, int] | None:
     if method == "refused":
         return None
     if method == "template":
-        return template_labels(structured, TEMPLATE_LABELS_PATH, query["id"])
+        return template_labels(structured, TEMPLATE_LABELS_BY_DATASET[query["dataset"]], query["id"])
     if method == "code:default_accounts":
         return default_account_labels(structured)
     if method == "code:root_login":
@@ -177,12 +181,17 @@ def main() -> None:
                     f"tokens={row['input_tokens']}"
                 )
 
+    existing_rows = []
+    if SUMMARY_PATH.exists():
+        with open(SUMMARY_PATH, newline="") as f:
+            existing_rows = [row for row in csv.DictReader(f) if row["dataset"] != args.dataset]
+
     SUMMARY_PATH.parent.mkdir(parents=True, exist_ok=True)
     with open(SUMMARY_PATH, "w", newline="") as f:
         writer = csv.DictWriter(f, fieldnames=FIELDNAMES)
         writer.writeheader()
-        writer.writerows(all_rows)
-    print(f"\nwrote {len(all_rows)} rows to {SUMMARY_PATH}")
+        writer.writerows(existing_rows + all_rows)
+    print(f"\nwrote {len(all_rows)} rows for {args.dataset} to {SUMMARY_PATH} ({len(existing_rows) + len(all_rows)} total)")
 
 
 if __name__ == "__main__":

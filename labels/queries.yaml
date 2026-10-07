@@ -37,3 +37,8 @@
   query: errors about missing files or misconfiguration
   label_method: template
   expected_flags: []
+- id: Q8
+  dataset: Linux
+  query: authentication failures or break-in attempts
+  label_method: template
+  expected_flags: []
