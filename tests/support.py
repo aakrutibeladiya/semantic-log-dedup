@@ -52,3 +52,6 @@ class FakeTypeSafeClient:
             usage=FakeUsage(input_tokens=self.input_tokens, output_tokens=self.output_tokens),
             model=self.resolved_model,
         )
+
+    def close(self) -> None:
+        pass

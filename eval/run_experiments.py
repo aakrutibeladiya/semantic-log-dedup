@@ -154,10 +154,6 @@ def main() -> None:
     load_dotenv()
     queries = [q for q in yaml.safe_load(QUERIES_PATH.read_text()) if q["dataset"] == args.dataset]
 
-    client = TypeSafeClient(model=config.MODEL)
-    cache = Cache(config.CACHE_PATH)
-    jev = JevClient(client, cache, model=config.MODEL)
-
     log_path = ROOT / "data" / "raw" / args.dataset / f"{args.dataset}_2k.log"
     structured_path = ROOT / "data" / "raw" / args.dataset / f"{args.dataset}_2k.log_structured.csv"
     lines = load_lines(log_path)
@@ -167,19 +163,21 @@ def main() -> None:
         structured = structured.loc[structured.index < args.limit]
 
     all_rows = []
-    for query in queries:
-        print(f"{query['id']}: {query['query']!r}")
-        rows = run_query(query, lines, structured, jev, config.CHUNK_SIZE, config.MATCH_THRESHOLD)
-        all_rows.extend(rows)
-        for row in rows:
-            if row["refused"]:
-                print(f"  {row['strategy']:12} refused")
-            else:
-                f1_display = f"{row['f1']:.2f}" if row["f1"] != "" else "n/a"
-                print(
-                    f"  {row['strategy']:12} f1={f1_display} lines_judged={row['lines_judged']}/{row['lines_total']} "
-                    f"tokens={row['input_tokens']}"
-                )
+    with TypeSafeClient(model=config.MODEL) as client, Cache(config.CACHE_PATH) as cache:
+        jev = JevClient(client, cache, model=config.MODEL)
+        for query in queries:
+            print(f"{query['id']}: {query['query']!r}")
+            rows = run_query(query, lines, structured, jev, config.CHUNK_SIZE, config.MATCH_THRESHOLD)
+            all_rows.extend(rows)
+            for row in rows:
+                if row["refused"]:
+                    print(f"  {row['strategy']:12} refused")
+                else:
+                    f1_display = f"{row['f1']:.2f}" if row["f1"] != "" else "n/a"
+                    print(
+                        f"  {row['strategy']:12} f1={f1_display} lines_judged={row['lines_judged']}/{row['lines_total']} "
+                        f"tokens={row['input_tokens']}"
+                    )
 
     existing_rows = []
     if SUMMARY_PATH.exists():

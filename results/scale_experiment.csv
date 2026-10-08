@@ -1,0 +1,7 @@
+query_id,query,strategy,refused,lines_total,lines_judged,reduction_ratio,input_tokens,output_tokens,resolved_model,agreement_with_baseline,wall_clock_seconds
+Q1,authentication failures or break-in attempts,none,False,30000,30000,1.0,3315244,634000,jev-1.13.0,1.0,122.5
+Q1,authentication failures or break-in attempts,drain,False,30000,616,0.020533333333333334,55602,13020,jev-1.13.0,0.7018666666666666,3.0
+Q1,authentication failures or break-in attempts,query-aware,False,30000,616,0.020533333333333334,55602,13020,jev-1.13.0,0.7018666666666666,0.7
+Q4,"login attempts using default or service account names such as admin, oracle, test, postgres",none,False,30000,30000,1.0,3645244,634000,jev-1.13.0,1.0,135.5
+Q4,"login attempts using default or service account names such as admin, oracle, test, postgres",drain,False,30000,616,0.020533333333333334,62378,13020,jev-1.13.0,0.3836333333333333,3.1
+Q4,"login attempts using default or service account names such as admin, oracle, test, postgres",query-aware,False,30000,30000,1.0,3645244,634000,jev-1.13.0,1.0,0.9

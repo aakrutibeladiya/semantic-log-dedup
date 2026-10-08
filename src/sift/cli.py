@@ -43,29 +43,29 @@ def run(argv: list[str], jev_factory: Callable[[], JevClient] = _default_jev_fac
     args = build_parser().parse_args(argv)
 
     lines = load_lines(args.log_file)
-    jev = jev_factory()
 
-    if args.strategy == "query-aware":
-        analysis = analyze_query(jev, args.query)
-        if analysis.refuse:
-            print(REFUSAL_MESSAGE, file=sys.stderr)
-            return 1
-        groups = query_aware_groups(lines, analysis.depends_on)
-    else:
-        groups = STRATEGIES[args.strategy](lines)
+    with jev_factory() as jev:
+        if args.strategy == "query-aware":
+            analysis = analyze_query(jev, args.query)
+            if analysis.refuse:
+                print(REFUSAL_MESSAGE, file=sys.stderr)
+                return 1
+            groups = query_aware_groups(lines, analysis.depends_on)
+        else:
+            groups = STRATEGIES[args.strategy](lines)
 
-    result = run_search(jev, lines, args.query, groups=groups, chunk_size=args.chunk_size, threshold=args.threshold)
+        result = run_search(jev, lines, args.query, groups=groups, chunk_size=args.chunk_size, threshold=args.threshold)
 
-    for index, text in result.matches:
-        print(f"{index}: {text}")
+        for index, text in result.matches:
+            print(f"{index}: {text}")
 
-    stats = result.stats
-    print(
-        f"lines_judged={stats.lines_judged}/{stats.lines_total} "
-        f"input_tokens={stats.input_tokens} output_tokens={stats.output_tokens} "
-        f"model={stats.resolved_model}",
-        file=sys.stderr,
-    )
+        stats = result.stats
+        print(
+            f"lines_judged={stats.lines_judged}/{stats.lines_total} "
+            f"input_tokens={stats.input_tokens} output_tokens={stats.output_tokens} "
+            f"model={stats.resolved_model}",
+            file=sys.stderr,
+        )
     return 0
 
 

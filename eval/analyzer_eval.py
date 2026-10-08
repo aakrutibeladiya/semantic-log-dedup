@@ -27,20 +27,18 @@ def main() -> None:
     testset = yaml.safe_load(TESTSET_PATH.read_text())
     flags = list(QUESTIONS)
 
-    client = TypeSafeClient(model=config.MODEL)
-    cache = Cache(config.CACHE_PATH)
-    jev = JevClient(client, cache, model=config.MODEL)
-
     correct = dict.fromkeys(flags, 0)
     mismatches = []
-    for case in testset:
-        result = analyze_query(jev, case["query"])
-        expected = frozenset(case["expected_flags"])
-        for flag in flags:
-            if (flag in expected) == (flag in result.depends_on):
-                correct[flag] += 1
-        if result.depends_on != expected:
-            mismatches.append((case, expected, result))
+    with TypeSafeClient(model=config.MODEL) as client, Cache(config.CACHE_PATH) as cache:
+        jev = JevClient(client, cache, model=config.MODEL)
+        for case in testset:
+            result = analyze_query(jev, case["query"])
+            expected = frozenset(case["expected_flags"])
+            for flag in flags:
+                if (flag in expected) == (flag in result.depends_on):
+                    correct[flag] += 1
+            if result.depends_on != expected:
+                mismatches.append((case, expected, result))
 
     total = len(testset)
     print(f"{total} queries\n")

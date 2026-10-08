@@ -8,6 +8,7 @@ from __future__ import annotations
 
 from collections.abc import Mapping
 from dataclasses import dataclass
+from typing import Self
 
 from typesafe_sdk import Noul, TypeSafeClient
 
@@ -61,3 +62,18 @@ class JevClient:
         }
         self._cache.put(self._model, state, questions, answers=answers, usage=usage, resolved_model=response.model)
         return NoulResult(answers=answers, usage=usage, resolved_model=response.model, cached=False)
+
+    def close(self) -> None:
+        """Close the underlying TypeSafe client and cache connection.
+
+        The SDK's own usage docs are explicit that `TypeSafeClient` should be used via
+        a context manager for proper connection cleanup -- this delegates that through.
+        """
+        self._client.close()
+        self._cache.close()
+
+    def __enter__(self) -> Self:
+        return self
+
+    def __exit__(self, *exc_info: object) -> None:
+        self.close()
